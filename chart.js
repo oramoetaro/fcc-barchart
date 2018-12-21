@@ -21,16 +21,22 @@
       .domain([
         d3.min(dataset, (d) => d[1]),
         d3.max(dataset, (d) => d[1])
-      ]).range([0, w]);
+      ]).range([0, h]);
 
     const svg = d3.select(".chart")
       .append("svg")
       .attr("width", w)
-      .attr("height", h)
-      .append("rect")
-      .attr("width", "100%")
-      .attr("height", "100%")
-      .style("fill", "blue");
+      .attr("height", h);
+
+    svg.selectAll("rect")
+    .data(dataset)
+    .enter()
+    .append("rect")
+    .attr("x", (d,i) => xScale(new Date(d[0]).getTime()))
+    .attr("y", (d,i) => h - d[1])
+    .attr("width", 1)
+    .attr("height", (d) => yScale(d[1]))
+    .attr("fill", "red");
 
     // document.getElementById('char-wrapper')
     //   .innerHTML = JSON.stringify(dataset);
