@@ -15,14 +15,17 @@
       .domain([
         d3.min(dataset, (d) => new Date(d[0]).getTime()),
         d3.max(dataset, (d) => new Date(d[0]).getTime())
-      ]).range([padding, w - padding]);
+      ]).range([padding, w]);
 
     const yScale = d3.scaleLinear()
-      .domain([ 0, d3.max(dataset, (d) => d[1])])
+      .domain([0, d3.max(dataset, (d) => d[1])])
       .range([padding, h - padding]);
 
     const xAxis = d3.axisBottom(xScale);
     const yAxis = d3.axisLeft(yScale);
+
+    xAxis.ticks(3);
+    yAxis.tickValues([yScale(0), yScale(15000)]);
 
     const svg = d3.select(".chart")
       .append("svg")
@@ -50,7 +53,7 @@
       .attr("transform", "translate(0, " + (h - padding) + ")")
       .call(xAxis);
 
-      svg.append("g")
+    svg.append("g")
       .attr("id", "y-axis")
       .attr("transform", "translate(" + padding + ", 0)")
       .call(yAxis);
