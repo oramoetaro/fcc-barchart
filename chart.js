@@ -1,8 +1,8 @@
 (function () {
   const url = 'https://raw.githubusercontent.com/freeCodeCamp/ProjectReferenceData/master/GDP-data.json';
-  const w = 500;
-  const h = 500;
-  const padding = 30;
+  const w = $('#chart').width();
+  const h = 300;
+  const padding = 0;
 
   var req = new XMLHttpRequest();
   req.open('GET', url, true);
@@ -15,13 +15,13 @@
       .domain([
         d3.min(dataset, (d) => new Date(d[0]).getTime()),
         d3.max(dataset, (d) => new Date(d[0]).getTime())
-      ]).range(padding, w - padding);
+      ]).range([padding, w - padding]);
 
     const yScale = d3.scaleLinear()
       .domain([
         d3.min(dataset, (d) => d[1]),
         d3.max(dataset, (d) => d[1])
-      ]).range([0, h]);
+      ]).range([padding, h - padding]);
 
     const svg = d3.select(".chart")
       .append("svg")
@@ -32,11 +32,14 @@
     .data(dataset)
     .enter()
     .append("rect")
-    .attr("x", (d,i) => xScale(new Date(d[0]).getTime()))
-    .attr("y", (d,i) => h - d[1])
-    .attr("width", 1)
+    .attr("class", "bar")
+    .attr("data-date", (d) => d[0])
+    .attr("data-gdp", (d) => d[1])
+    .attr("x", (d) => xScale(new Date(d[0]).getTime()))
+    .attr("y", (d) => h - yScale(d[1]))
+    .attr("width", w / dataset.length)
     .attr("height", (d) => yScale(d[1]))
-    .attr("fill", "red");
+    .attr("fill", "#c94c4c");
 
     // document.getElementById('char-wrapper')
     //   .innerHTML = JSON.stringify(dataset);

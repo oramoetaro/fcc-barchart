@@ -1,0 +1,12 @@
+html, body {
+  height: 100%;
+}
+
+body {
+  background-color: #b1cbbb;
+}
+
+#chart {
+  width: 900px;
+  background-color: white;
+}
