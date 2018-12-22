@@ -14,3 +14,7 @@ body {
 .bar:hover {
   fill: #eea29a;
 }
+
+.bar-title {
+  font-size: 26px;
+}
