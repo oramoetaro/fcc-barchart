@@ -1,4 +1,7 @@
 (function () {
+
+  $('[data-toggle="tooltip"]').tooltip();
+
   const url = 'https://raw.githubusercontent.com/freeCodeCamp/ProjectReferenceData/master/GDP-data.json';
   const w = $('#chart').width();
   const h = 300;
@@ -39,7 +42,9 @@
     .attr("y", (d) => h - yScale(d[1]))
     .attr("width", w / dataset.length)
     .attr("height", (d) => yScale(d[1]))
-    .attr("fill", "#c94c4c");
+    .attr("fill", "#c94c4c")
+    .append("title")
+    .text((d) => d[0]);
 
     // document.getElementById('char-wrapper')
     //   .innerHTML = JSON.stringify(dataset);

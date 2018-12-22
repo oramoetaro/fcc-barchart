@@ -10,3 +10,7 @@ body {
   width: 900px;
   background-color: white;
 }
+
+.bar:hover {
+  fill: #eea29a;
+}
