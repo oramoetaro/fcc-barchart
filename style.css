@@ -6,6 +6,10 @@ body {
   background-color: #b1cbbb;
 }
 
+.hide {
+  display: none;
+}
+
 .chart {
   width: 900px;
   background-color: white;
