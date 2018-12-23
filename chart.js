@@ -11,10 +11,10 @@
     json = JSON.parse(req.responseText);
     const dataset = json.data;
 
-    const xScale = d3.scaleLinear()
+    const xScale = d3.scaleTime()
       .domain([
-        d3.min(dataset, (d) => new Date(d[0]).getTime()),
-        d3.max(dataset, (d) => new Date(d[0]).getTime())
+        d3.min(dataset, (d) => new Date(d[0])),
+        d3.max(dataset, (d) => new Date(d[0]))
       ]).range([padding, w]);
 
     const yScale = d3.scaleLinear()
@@ -24,7 +24,7 @@
     const xAxis = d3.axisBottom(xScale);
     const yAxis = d3.axisLeft(yScale);
 
-    xAxis.ticks(3);
+    xAxis.ticks(6);
     yAxis.tickValues([yScale(0), yScale(15000)]);
 
     const svg = d3.select(".chart")
@@ -39,7 +39,7 @@
       .attr("class", "bar")
       .attr("data-date", (d) => d[0])
       .attr("data-gdp", (d) => d[1])
-      .attr("x", (d) => xScale(new Date(d[0]).getTime()))
+      .attr("x", (d) => xScale(new Date(d[0])))
       .attr("y", (d) => h - yScale(d[1]))
       .attr("width", w / dataset.length)
       .attr("height", (d) => yScale(d[1]) - padding)
