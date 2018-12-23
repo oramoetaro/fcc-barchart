@@ -54,9 +54,7 @@
       .attr("id", "y-axis")
       .attr("transform", "translate(" + xPadding + ", 0)")
       .call(yAxis);
-
   };
-
 })();
 
 function tooltip(e) {
