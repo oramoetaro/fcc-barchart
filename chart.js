@@ -44,8 +44,9 @@
       .attr("height", (d) => h - yScale(d[1]) - padding)
       .attr("fill", "#c94c4c")
       .attr("data-toggle", "tooltip")
+      .attr("data-html", "true")
       .attr("data-placement", "right")
-      .attr("title", "titulo");
+      .attr("title", (d) => d[0] + "<br>GDP: " + d[1]);
 
     svg.append("g")
       .attr("id", "x-axis")
