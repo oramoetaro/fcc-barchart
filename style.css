@@ -6,9 +6,10 @@ body {
   background-color: #b1cbbb;
 }
 
-#chart {
+.chart {
   width: 900px;
   background-color: white;
+  position: relative;
 }
 
 .bar:hover {
@@ -17,4 +18,11 @@ body {
 
 .bar-title {
   font-size: 26px;
+}
+
+#tooltip {
+  background-color: #deeaee;
+  width: 220px;
+  height: 70px;
+  top: 200px;
 }

@@ -44,10 +44,8 @@
       .attr("width", w / dataset.length)
       .attr("height", (d) => h - yScale(d[1]) - yPadding)
       .attr("fill", "#c94c4c")
-      .attr("data-toggle", "tooltip")
-      .attr("data-html", "true")
-      .attr("data-placement", "right")
-      .attr("title", (d) => d[0] + "<br>GDP: " + d[1]);
+      .attr("onmouseover", "tooltip(this)")
+      .attr("onmouseout", "stopTracking()");
 
     svg.append("g")
       .attr("id", "x-axis")
@@ -60,8 +58,22 @@
       .call(yAxis);
 
     // Initialize Bootstrap Tooltips
-    $('[data-toggle="tooltip"]').tooltip()
+    // $('[data-toggle="tooltip"]').tooltip()
 
   };
 
 })();
+
+function stopTracking() {
+  $("#tooltip").addClass("d-none");
+}
+
+function tooltip(e) {
+  const date = $(e).attr("data-date");
+  const value = $(e).attr("data-gdp")
+  $("#tooltip")
+    .attr("data-date", date)
+    .removeClass("d-none");
+  $(".tooltip-date").text(date);
+  $(".tooltip-gdp").text(`GDP: \$${value} billions`);
+}
